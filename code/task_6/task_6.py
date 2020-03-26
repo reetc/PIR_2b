@@ -147,7 +147,8 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
     plot(objp,xloc,yloc,zloc)
 
 if __name__ == "__main__":
-
+    import pathlib
+    pathlib.Path('../../output/task_6').mkdir(parents=True, exist_ok=True)
     M1=[[423.27381306,0,341.34626532],[0,421.27401756,269.28542111],[0,0,1]]
     dist1=[-0.43394157423038077,0.26707717557547866,-0.00031144347020293427,0.000563893810148836,-0.10970452266148858]
 
