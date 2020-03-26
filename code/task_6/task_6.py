@@ -82,7 +82,7 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
     i=0
 
 
-    f = open("../../parameters/task_6.txt","w")
+    f = open("../../parameters/task_6_"+camera+".txt","w")
     while(i<len(images)):
         try:
         # Capture frame-by-frame
