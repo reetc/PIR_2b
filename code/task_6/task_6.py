@@ -82,16 +82,19 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
     i=0
 
 
-
+    f = open("../../parameters/task_6.txt","w")
     while(i<len(images)):
         try:
         # Capture frame-by-frame
         # ret, frame = cap.read()
+          print(images[i])
           frame = cv2.imread(images[i])
+
           # Our operations on the frame come here
           gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
           res = cv2.aruco.detectMarkers(gray,dictionary)
+          print(res[0])
       #   print(res[0],res[1],len(res[2]))
 
           if len(res[0]) > 0:
@@ -111,6 +114,7 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
           cv2.line(gray, x3, x4, (255, 0, 0), 1)
           cv2.line(gray, x4, x1, (255, 0, 0), 1)
           _,rvecs, tvecs = cv2.solvePnP(objp, imgp, camera_matrix, dist)
+          print('rvect: ',rvecs,'tvecs: ',tvecs)
           # print(tvecs)
 
 
@@ -121,7 +125,7 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
           totalrotmax=np.array([[ZYX[0,0],ZYX[0,1],ZYX[0,2],tvecs[0]],[ZYX[1,0],ZYX[1,1],ZYX[1,2],tvecs[1]],[ZYX[2,0],ZYX[2,1],ZYX[2,2],tvecs[2]],[0.,0.,0.,1.]],dtype='float')
           WtoC=np.mat(totalrotmax)
           inverserotmax=np.linalg.inv(totalrotmax)
-          f=inverserotmax
+          # f=inverserotmax
           # print(inverserotmax)
           xloc.append(inverserotmax[0][3])
           yloc.append(inverserotmax[1][3])
@@ -129,13 +133,22 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
 
 
           # print(tvecs)
-          filename='../../output/task_6/img_'+camera+str(i)+'.jpg'
+          img_name = images[i].split('/')[-1]
+          # print(img_name)
+          filename='../../output/task_6/'+img_name
           # cv2.imshow('frame',frame)
           cv2.imwrite(filename, frame)
-          print('image {} saved in output folder'.format(i) )
+          print('image {} saved in output folder'.format(img_name) )
           i+=1
+          f.write(img_name+'\n')
+          f.write('translation vector \n')
+          f.write(str(tvecs)+'\n')
+          f.write('rotation matrix \n')
+          f.write(str(ZYX)+'\n')
+
         except:
-          print('skipping image {}'.format(i))
+          img_name = images[i].split('/')[-1]
+          print('skipping image {}'.format(img_name))
           i+=1
           continue
 
