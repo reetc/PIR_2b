@@ -2,5 +2,5 @@
 
 ## Task 6
 To run:
-python task6.py <camera>(left/right)
-Example: python task6.py left
+python task_6.py <camera>(left/right)
+Example: python task_6.py left
