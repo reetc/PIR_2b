@@ -37,6 +37,7 @@ def plot(objp,xloc,yloc,zloc):
   ax.scatter3D(xloc,yloc,zloc)
   ax.view_init(azim=60)
   plt.show()
+  # plt.savefig('../../output/task_6/camera_poses.pdf')
 # for angle in range(0, 360):
 #     ax.view_init(30, angle)
 #     plt.show()
@@ -144,7 +145,7 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
           f.write('translation vector \n')
           f.write(str(tvecs)+'\n')
           f.write('rotation matrix \n')
-          f.write(str(ZYX)+'\n')
+          f.write(str(ZYX)+'\n\n\n')
 
         except:
           img_name = images[i].split('/')[-1]
