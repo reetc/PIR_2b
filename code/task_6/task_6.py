@@ -95,11 +95,11 @@ def pose_estimate(M1,dist1,M2,dist2,camera):
             filename='../../output/task_6/img_'+camera+str(image_index)+'.jpg'
             # cv2.imshow('frame',frame)
             # print('image {} saved in output folder'.format(img_name) )
-            f.write(camera+image_index+'\n')
-            f.write('translation vector \n')
+            f.write(camera+"_"+image_index+'.png\n')
+            f.write('Translation vector: \n')
             f.write(str(t)+'\n')
-            f.write('rotation matrix \n')
-            f.write(str(R)+'\n')
+            f.write('Rotation matrix: \n')
+            f.write(str(R)+'\n\n\n')
             cv2.imwrite(filename, frame)
             print('image {} saved in output folder'.format(image_index) )
             i+=1
