@@ -21,6 +21,9 @@ def plot(objp, T_s, img_idx, write_to_file = True, file_name = "camera_poses.png
     ax.plot(objp[1],objp[2])
     ax.plot(objp[2],objp[3])
     ax.plot(objp[3],objp[0])
+    xloc=[]
+    yloc=[]
+    zloc=[]
     for i,T in zip(img_idx, T_s):
         start = np.array([0,0,0,1])
         end = np.array([0,0,0.5,1])
@@ -28,6 +31,10 @@ def plot(objp, T_s, img_idx, write_to_file = True, file_name = "camera_poses.png
         rotated_c1 = np.matmul(T, c1)
         ax.plot([rotated_c1[0,0],rotated_c1[0,1]], [rotated_c1[1,0],rotated_c1[1,1]], [rotated_c1[2,0],rotated_c1[2,1]])
         ax.text(rotated_c1[0,0],rotated_c1[1,0],rotated_c1[2,0]-0.05, i)
+        xloc.append(T[0][3])
+        yloc.append(T[1][3])
+        zloc.append(T[2][3])
+    ax.scatter(xloc, yloc, zloc)
     if(write_to_file):
         plt.savefig("../../output/task_6/"+ file_name)
     plt.show()
